@@ -7,17 +7,22 @@ var cookieParser = require('cookie-parser');
 var session = require('cookie-session')
 var bodyParser = require('body-parser');
 
+// routing modules.
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var mysqltest = require('./routes/mysqltest');
 var categories = require('./routes/categories');
+var appinit = require('./routes/application.js');
+var about = require('./routes/about.js');
+var home = require('./routes/home.js');
+var contact = require('./routes/contact.js');
+var stockItem = require('./routes/stockItem.js');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
-
 
 app.use(favicon());
 app.use(logger('dev'));
@@ -26,8 +31,8 @@ app.use(bodyParser.urlencoded());
 
 app.use(cookieParser());
 app.use(session({
-  keys: ['key1', 'key2']
-  }));
+  keys: ['se54gse5gse5ge5jfgjh', 'hfh4e56h6r5hdtage56y']
+}));
 
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -38,11 +43,16 @@ app.use('/', routes);
 app.use('/users', users);
 
 // store app restful crud api
+app.use('/appinit',appinit);
 app.use('/categories',categories);
+app.use('/about',about);
+app.use('/home',home);
+app.use('/contact',contact);
+app.use('/stockItem',stockItem);
+
 
 // testing mysql connection and query.
 app.use('/mysqltest', mysqltest);
-app.use('/mysqltest/:id', mysqltest);
 
 
 /// catch 404 and forward to error handler

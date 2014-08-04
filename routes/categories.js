@@ -8,10 +8,11 @@ var router = express.Router();
 router.get('/', pullRequest);
 
 function pullRequest(req, res) {
-
+    
     async.waterfall([cat,subcat1,subcat2], function (err, data) {
         res.jsonp(data);
     });
+     
 }
 
 function cat(callback) {
@@ -39,7 +40,7 @@ function cat(callback) {
     });
 }
 
-function subcat1(items,callback) {
+function subcat1(items,callback) { 
     var connection = utils.connect();          
     sql = "select * from SubCategories1"; 
     connection.query(sql,
